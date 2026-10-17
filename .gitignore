@@ -1,0 +1,22 @@
+# Personal GPS data and outputs (never commit location data)
+GPS Data/
+*.gpx
+*.places.json
+*-report.txt
+timeline-alt-settings.json
+
+# Spec and working documents (kept local)
+*.docx
+*.doc
+~$*
+~WRL*.tmp
+
+# Windows shortcuts and system files
+*.lnk
+Thumbs.db
+desktop.ini
+
+# Tooling
+node_modules/
+test/
+.vscode/

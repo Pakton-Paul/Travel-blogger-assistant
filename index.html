@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline alternative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <h1>Timeline alternative</h1>
+    <p>Travel Blogger Assistant · prototype</p>
+  </div>
+  <div class="actions">
+    <button id="btnFolder" class="btn">Choose GPS folder</button>
+    <button id="btnReconnect" class="btn btn-accent" hidden>Reconnect folder</button>
+    <label class="btn btn-ghost" for="fileInput">Open a GPX file</label>
+    <input id="fileInput" type="file" accept=".gpx,application/gpx+xml" hidden>
+    <button id="btnSettings" class="btn btn-ghost" aria-label="Settings">Settings</button>
+  </div>
+</header>
+
+<div id="status" class="status" role="status"></div>
+
+<main class="layout">
+  <section class="col-left">
+
+    <div class="card" id="dayCard">
+      <div class="row">
+        <label for="daySelect" class="lbl">Day</label>
+        <select id="daySelect" disabled><option>Choose a folder or open a file</option></select>
+      </div>
+      <dl class="summary" id="summary">
+        <div><dt>Date</dt><dd id="sumDate">–</dd></div>
+        <div><dt>GPS data</dt><dd id="sumTimes">–</dd></div>
+        <div><dt>Distance (estimate)</dt><dd id="sumDist">–</dd></div>
+        <div class="wide"><dt>Data quality</dt><dd id="sumQuality">–</dd></div>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h2>Itinerary</h2>
+      <p class="hint">Click a place name to edit it. Edits are remembered for next time.</p>
+      <ol id="itinerary" class="itinerary"></ol>
+    </div>
+
+    <div class="card">
+      <h2><label for="notes">Notes</label></h2>
+      <textarea id="notes" rows="5" placeholder="Your notes for the day — they go at the end of the report."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="row spread">
+        <h2>Report</h2>
+        <div class="actions">
+          <button id="btnCopy" class="btn btn-ghost" disabled>Copy</button>
+          <button id="btnSave" class="btn" disabled>Save report</button>
+        </div>
+      </div>
+      <pre id="report" class="report">No day loaded yet.</pre>
+    </div>
+
+  </section>
+
+  <section class="col-right">
+    <div id="map" class="map" aria-label="Map of the day"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  Place names and map © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>
+</footer>
+
+<dialog id="settingsDlg" class="dlg">
+  <form method="dialog" id="settingsForm">
+    <h2>Settings</h2>
+    <div id="settingsFields" class="fields"></div>
+    <div class="home-tools">
+      <button type="button" id="btnHomeHere" class="btn btn-ghost">Use my current location as Home</button>
+      <button type="button" id="btnHomeMap" class="btn btn-ghost">Pick Home on the map</button>
+    </div>
+    <div class="row spread dlg-foot">
+      <div class="actions">
+        <button type="button" id="btnExport" class="btn btn-ghost">Export settings</button>
+        <label class="btn btn-ghost" for="importInput">Import settings</label>
+        <input id="importInput" type="file" accept=".json,application/json" hidden>
+        <button type="button" id="btnDefaults" class="btn btn-ghost">Reset to defaults</button>
+      </div>
+      <div class="actions">
+        <button value="cancel" class="btn btn-ghost">Cancel</button>
+        <button id="btnSaveSettings" value="save" class="btn">Save</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
